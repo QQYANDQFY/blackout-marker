@@ -1,8 +1,9 @@
 name: Publish to Modrinth
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - '*'
 
 permissions:
   contents: read
@@ -29,8 +30,8 @@ jobs:
 
           files: dist/blackout-marker-*.jar
 
-          name: Blackout Marker ${{ github.event.release.tag_name }}
-          version: ${{ github.event.release.tag_name }}
+          name: Blackout Marker ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
           version-type: release
 
           loaders: fabric
@@ -39,4 +40,14 @@ jobs:
           dependencies: |
             fabric-api | required | 0.161.0+26.3
 
-          changelog: ${{ github.event.release.body }}
+          changelog: |
+            Initial release for Minecraft 26.3.
+
+            - Entity, block, tag, manual target selection
+            - Any-part/center visibility and optional occlusion hiding
+            - Per-target sizes and visibility/occlusion overrides
+            - Multiple fixed-direction markers with per-marker sizes
+            - Sun/moon markers with individual sizes
+            - AI-assisted development; human-reviewed, compiled, and tested
+
+            Licensed under LGPL-3.0-only.

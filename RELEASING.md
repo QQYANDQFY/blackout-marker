@@ -1,49 +1,43 @@
 # Releasing Blackout Marker
 
-The GitHub repository has to be created by the maintainer. The local project is
-already initialized as a git repository and tagged `1.0.0`.
+Repository: <https://github.com/QQYANDQFY/blackout-marker>
 
-## 1. Create the GitHub repository
+The project is already committed and tagged `1.0.0`. The Modrinth token is stored
+as the `MODRINTH_TOKEN` Actions secret.
 
-Create an **empty** repository named `blackout-marker` (no README, license, or
-`.gitignore`), then from this directory:
+## 1. Push / update the repository
 
 ```bash
-git remote add origin https://github.com/<your-account>/blackout-marker.git
-git push -u origin main
-git push origin 1.0.0
+cd "D:\PCL\.minecraft\versions\26.3-Fabric 0.19.5\blackout-marker"
+git -c http.proxy= -c https.proxy= -c http.version=HTTP/1.1 push origin main
 ```
 
-## 2. Add the Modrinth token
-
-Create a Modrinth API token at <https://modrinth.com/settings/account> and add it
-to the GitHub repository as an Actions secret:
-
-- Name: `MODRINTH_TOKEN`
-- Value: the token (never commit it)
-
-## 3. Configure the Modrinth project
+## 2. Configure the Modrinth project
 
 In the Modrinth project settings:
 
 - License: **LGPL-3.0-only**
 - Project URL: <https://modrinth.com/project/blackout-marker>
 - Description: paste the relevant content from `MODRINTH.md`, including the AI disclosure.
+- Links → GitHub: <https://github.com/QQYANDQFY/blackout-marker>
 
-## 4. Create the GitHub release
+## 3. Trigger the publish workflow
 
-Create a release from tag **`1.0.0`** (no `v` prefix). Use `CHANGELOG.md` as the
-release body. Publishing the release triggers `.github/workflows/publish.yml`.
+The workflow runs on a pushed tag matching `*`. Use a version tag without a `v`
+prefix so Modrinth receives a clean version string:
+
+```bash
+git tag 1.0.0
+git -c http.proxy= -c https.proxy= -c http.version=HTTP/1.1 push origin 1.0.0
+```
+
+For a new release, bump the version in `fabric.mod.json` and `build.ps1`, rebuild,
+commit the new `dist/*.jar`, push `main`, then push the new tag.
 
 The workflow publishes the committed `dist/blackout-marker-1.0.0.jar`. It does
-not compile the source, because the local manual build depends on non-redistributed
+not compile the source, because the manual build depends on non-redistributed
 Minecraft/Fabric jars in `libs/`.
 
-## Future releases
-
-1. Update `version` in `fabric.mod.json` and `build.ps1`/output names.
-2. Rebuild with `build.ps1`; commit the new `dist/*.jar`.
-3. Commit and push.
-4. Create a new GitHub release from the new tag.
+A GitHub Release is optional and is not required to trigger publication.
 
 Never commit `MODRINTH_TOKEN`, `libs/`, `build/`, or local logs/configs.
