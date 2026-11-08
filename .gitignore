@@ -1,0 +1,19 @@
+# Local compile dependencies (Minecraft/Fabric/Mod Menu jars, not redistributed)
+libs/
+
+# Local build output
+build/
+run/
+.gradle/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Local logs/screenshots/configs
+logs/
+screenshots/
+*.log

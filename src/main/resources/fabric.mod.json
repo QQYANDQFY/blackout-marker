@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "blackout-marker",
+  "version": "1.0.0",
+  "name": "Blackout Marker",
+  "description": "Draws dynamic, screen-space black squares over selected entities, blocks, fixed directions, and the sun/moon.",
+  "authors": [
+    "Blackout Marker contributors"
+  ],
+  "license": "LGPL-3.0-only",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.blackoutmarker.BlackoutMarkerMod"
+    ],
+    "modmenu": [
+      "dev.blackoutmarker.compat.BlackoutModMenu"
+    ]
+  },
+  "mixins": [
+    "mixins.blackoutmarker.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.3",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "contact": {
+    "homepage": "https://modrinth.com/project/blackout-marker",
+    "sources": "https://github.com/QQYANDQFY/blackout-marker",
+    "issues": "https://github.com/QQYANDQFY/blackout-marker/issues"
+  },
+  "custom": {
+    "modrinth": "https://modrinth.com/project/blackout-marker",
+    "aiDisclosure": "Developed with AI assistance; reviewed and tested by the maintainer."
+  }
+}
